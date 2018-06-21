@@ -5,9 +5,24 @@ resource "google_compute_instance" "rancher-master" {
   description  = "rancher-master"
   tags         = ["rancher-master", "rancher"]
 
+  // Dockerのインストール & ubuntuユーザーをdockerグループに追加
+  provisioner "remote-exec" {
+    connection {
+      user        = "${var.gce_ssh_user}"
+      private_key = "${file(var.gce_ssh_secret_key_file)}"
+    }
+
+    inline = [
+      "sudo apt-get -y update",
+      "sudo apt-get -y install vim git curl",
+      "curl releases.rancher.com/install-docker/1.12.sh | bash",
+      "sudo usermod -a -G docker nnao45",
+    ]
+  }
+
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1804-lts"
+      image = "ubuntu-os-cloud/ubuntu-1604-lts"
     }
   }
 
