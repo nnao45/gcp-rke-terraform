@@ -1,9 +1,9 @@
-resource "google_compute_instance" "rke-master" {
-  name         = "rke-master"
+resource "google_compute_instance" "rancher-master" {
+  name         = "rancher-master"
   machine_type = "n1-standard-1"
   zone         = "asia-northeast1-c"
-  description  = "rke-master"
-  tags         = ["rke-master", "rke"]
+  description  = "rancher-master"
+  tags         = ["rancher-master", "rancher"]
 
   boot_disk {
     initialize_params {
@@ -11,12 +11,16 @@ resource "google_compute_instance" "rke-master" {
     }
   }
 
+  metadata {
+    sshKeys = "${var.gce_ssh_user}:${file(var.gce_ssh_pub_key_file)}"
+  }
+
   network_interface {
     access_config {
       //Ephemeral IP
     }
 
-    subnetwork = "${google_compute_subnetwork.rke-subnet.name}"
+    subnetwork = "${google_compute_subnetwork.rancher-subnet.name}"
   }
 
   service_account {

@@ -1,6 +1,6 @@
-resource "google_compute_firewall" "rke-firewall" {
-  name    = "rke-firewall"
-  network = "${google_compute_network.rke-network.name}"
+resource "google_compute_firewall" "rancher-firewall" {
+  name    = "rancher-firewall"
+  network = "${google_compute_network.rancher-network.name}"
 
   allow {
     protocol = "icmp"
@@ -16,5 +16,5 @@ resource "google_compute_firewall" "rke-firewall" {
     ports    = ["8472"]
   }
 
-  target_tags = ["${google_compute_instance.rke-master.tags}"]
+  target_tags = ["${google_compute_instance.rancher-master.tags}"]
 }
