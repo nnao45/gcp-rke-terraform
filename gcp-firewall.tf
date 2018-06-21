@@ -1,6 +1,6 @@
-resource "google_compute_firewall" "myhouse" {
-  name    = "development"
-  network = "${google_compute_network.myhouse.name}"
+resource "google_compute_firewall" "rke-firewall" {
+  name    = "rke-firewall"
+  network = "${google_compute_network.rke-network.name}"
 
   allow {
     protocol = "icmp"
@@ -16,5 +16,5 @@ resource "google_compute_firewall" "myhouse" {
     ports    = ["8472"]
   }
 
-  target_tags = ["${google_compute_instance.myhouse.tags}"]
+  target_tags = ["${google_compute_instance.rke-master.tags}"]
 }

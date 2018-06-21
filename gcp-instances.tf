@@ -1,22 +1,22 @@
-resource "google_compute_instance" "myhouse" {
-  name         = "rke"
+resource "google_compute_instance" "rke-master" {
+  name         = "rke-master"
   machine_type = "n1-standard-1"
   zone         = "asia-northeast1-c"
-  description  = "rke"
-  tags         = ["myhouse", "rke"]
+  description  = "rke-master"
+  tags         = ["rke-master", "rke"]
 
   boot_disk {
     initialize_params {
-        image = "ubuntu-os-cloud/ubuntu-1804-lts"
+      image = "ubuntu-os-cloud/ubuntu-1804-lts"
     }
   }
 
   network_interface {
     access_config {
-       //Ephemeral IP
+      //Ephemeral IP
     }
-  
-    subnetwork = "${google_compute_subnetwork.rke.name}"
+
+    subnetwork = "${google_compute_subnetwork.rke-subnet.name}"
   }
 
   service_account {
