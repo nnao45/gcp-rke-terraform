@@ -3,7 +3,7 @@ variable "gce_ssh_pub_key_file" {}
 variable "gce_ssh_secret_key_file" {}
 
 variable "gce_region" {
-  default = "n1-standard-1"
+  default = "asia-northeast1-c"
 }
 
 provider "google" {
