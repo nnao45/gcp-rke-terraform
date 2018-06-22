@@ -30,6 +30,12 @@ resource "google_compute_instance" "k8s-master" {
       "sudo sh -c 'echo deb http://apt.kubernetes.io/ kubernetes-xenial main > /etc/apt/sources.list.d/kubernetes.list '",
       "sudo apt-get -y update",
       "sudo apt-get install -y kubelet kubeadm kubectl",
+      "sudo kubeadm init --pod-network-cidr=192.168.0.0/16",
+      "mkdir -p ~/.kube",
+      "sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config",
+      "sudo chown ${var.gce_ssh_user}:${var.gce_ssh_user} ~/.kube/config",
+      "sudo kubectl apply -f https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml",
+      "sudo kubectl taint nodes --all node-role.kubernetes.io/master-",
     ]
   }
 
