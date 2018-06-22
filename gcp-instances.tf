@@ -32,6 +32,7 @@ resource "google_compute_instance" "k8s-master" {
 
   boot_disk {
     initialize_params {
+      size  = "50"
       image = "ubuntu-os-cloud/ubuntu-1604-lts"
     }
   }
