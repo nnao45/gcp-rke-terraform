@@ -36,6 +36,10 @@ resource "google_compute_instance" "k8s-master" {
       "sudo chown ${var.gce_ssh_user}:${var.gce_ssh_user} ~/.kube/config",
       "sudo kubectl apply -f https://docs.projectcalico.org/v2.6/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml",
       "sudo kubectl taint nodes --all node-role.kubernetes.io/master-",
+      "sudo wget https://raw.githubusercontent.com/nnao45/gcp-rke-terraform/master/kubernetes-dashboard.yaml -P /etc/kubernetes/manifests/",
+      "sudo kubectl apply -f /etc/kubernetes/manifests/kubernetes-dashboard.yaml",
+      "sudo wget https://raw.githubusercontent.com/nnao45/gcp-rke-terraform/master/kubernetes-dashboard-service.yaml -P /etc/kubernetes/manifests/",
+      "sudo kubectl create -f /etc/kubernetes/manifests/kubernetes-dashboard-service.yaml",
     ]
   }
 
