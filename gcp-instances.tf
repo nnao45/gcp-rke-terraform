@@ -38,7 +38,7 @@ resource "google_compute_instance" "k8s-master" {
       "sudo kubectl taint nodes --all node-role.kubernetes.io/master-",
       "sudo wget https://raw.githubusercontent.com/nnao45/gcp-rke-terraform/master/kubernetes-dashboard.yaml -P /etc/kubernetes/manifests/",
       "sudo kubectl apply -f /etc/kubernetes/manifests/kubernetes-dashboard.yaml",
-      "sudo wget https://raw.githubusercontent.com/nnao45/gcp-rke-terraform/master/kubernetes-dashboard-service.yaml -P /etc/kubernetes/manifests/",
+      "sudo wget https://raw.githubusercontent.com/nnao45/gcp-rke-terraform/master/kubernetest-dashboard-service.yaml -P /etc/kubernetes/manifests/",
       "sudo kubectl create -f /etc/kubernetes/manifests/kubernetes-dashboard-service.yaml",
     ]
   }
