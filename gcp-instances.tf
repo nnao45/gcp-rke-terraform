@@ -1,6 +1,6 @@
 resource "google_compute_instance" "k8s-master" {
   name         = "k8s-master"
-  machine_type = "n1-standard-1"
+  machine_type = "n1-standard-2"
   zone         = "asia-northeast1-c"
   description  = "k8s-master"
   tags         = ["k8s-master", "k8s"]
@@ -16,6 +16,9 @@ resource "google_compute_instance" "k8s-master" {
 
     inline = [
       "sudo swapoff -a",
+      "sudo sh -c 'echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables'",
+      "sudo sh -c 'echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables'",
+      "sudo sh -c 'echo 1 > /proc/sys/net/bridge/bridge-nf-call-arptables'",
       "sudo sh -c 'echo net/bridge/bridge-nf-call-ip6tables = 1 >> /etc/ufw/sysctl.conf'",
       "sudo sh -c 'echo net/bridge/bridge-nf-call-iptables = 1 >> /etc/ufw/sysctl.conf'",
       "sudo sh -c 'echo net/bridge/bridge-nf-call-arptables = 1 >> /etc/ufw/sysctl.conf'",
