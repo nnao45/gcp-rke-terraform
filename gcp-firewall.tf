@@ -1,6 +1,6 @@
-resource "google_compute_firewall" "rancher-firewall" {
-  name    = "rancher-firewall"
-  network = "${google_compute_network.rancher-network.name}"
+resource "google_compute_firewall" "k8s-firewall" {
+  name    = "k8s-firewall"
+  network = "${google_compute_network.k8s-network.name}"
 
   allow {
     protocol = "icmp"
@@ -16,5 +16,6 @@ resource "google_compute_firewall" "rancher-firewall" {
     ports    = ["8472"]
   }
 
-  target_tags = ["${google_compute_instance.rancher-master.tags}"]
+  #target_tags = ["${google_compute_instance.k8s-master.tags}"]
+  target_tags = ["k8s-master", "k8s"]
 }
