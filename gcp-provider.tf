@@ -9,7 +9,7 @@ variable "gce_region" {
 }
 
 provider "google" {
-  credentials = "${file("~/Downloads/nnao45-gcp-8348f76d3f40.json")}"
+  credentials = "${file("~/Downloads/nnao45-gcp-21c7bd4d3907.json")}"
   project     = "nnao45-gcp"
   region      = "asia-northeast1"
 }

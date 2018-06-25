@@ -7,8 +7,12 @@ resource "google_compute_firewall" "k8s-firewall" {
   }
 
   allow {
+    protocol = "ipip"
+  }
+
+  allow {
     protocol = "tcp"
-    ports    = ["22", "80", "443", "6443", "2379-2380", "10053-10055", "10250-10256", "30000-32767"]
+    ports    = ["22", "80", "179", "443", "6443", "8080", "2379-2380", "10053-10055", "10250-10256", "30000-32767"]
   }
 
   allow {
@@ -17,5 +21,5 @@ resource "google_compute_firewall" "k8s-firewall" {
   }
 
   #target_tags = ["${google_compute_instance.k8s-master.tags}"]
-  target_tags = ["k8s-master", "k8s"]
+  target_tags = ["k8s"]
 }
