@@ -241,8 +241,10 @@ resource "google_compute_instance" "k8s-node2" {
       "sudo sh -c 'echo KUBELET_ARGS=--network-plugin=cni --network-plugin-dir=/etc/cni/net.d  >> /etc/kubernetes/kubelet'",
       "sudo sh -c 'echo KUBE_PROXY_ARGS=--proxy-mode=iptables  >> /etc/kubernetes/proxy'",
       "sudo mkdir -p /etc/cni/net.d",
-      "sudo sh -c 'echo '{\"name\": \"calico-k8s-network\", \"type\": \"calico\", \"etcd_authority\": \"10.45.0.2:2379\", \"log_level\": \"info\", \"ipam\": {\"type\": \"calico-ipam\"}}' >> /etc/cni/net.d/10-calico.conf'",
+
+      #"sudo sh -c 'echo '{\"name\": \"calico-k8s-network\", \"type\": \"calico\", \"etcd_authority\": \"10.45.0.2:2379\", \"log_level\": \"info\", \"ipam\": {\"type\": \"calico-ipam\"}}' >> /etc/cni/net.d/10-calico.conf'",
       "sudo wget https://github.com/projectcalico/calico-cni/releases/download/v1.3.0/calico -P /opt/calico/bin",
+
       "sudo sh -c 'chmod +x /opt/calico/bin/calico'",
       "sudo systemctl enable kube-proxy",
       "sudo systemctl enable kubelet",
