@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo mkdir -p /etc/cni/net.d
 sudo tee /etc/cni/net.d/10-calico.conf <<EOF > /dev/null
 {
     "name": "calico-k8s-network",
