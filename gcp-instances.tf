@@ -101,6 +101,8 @@ resource "google_compute_instance" "k8s-node1" {
       private_key = "${file(var.gce_ssh_secret_key_file)}"
     }
 
+    script = "make-caliconf.sh"
+
     inline = [
       "sudo swapoff -a",
       "sudo setenforce 0",
@@ -170,6 +172,8 @@ resource "google_compute_instance" "k8s-node2" {
       user        = "${var.gce_ssh_user}"
       private_key = "${file(var.gce_ssh_secret_key_file)}"
     }
+
+    script = "make-caliconf.sh"
 
     inline = [
       "sudo swapoff -a",
