@@ -48,6 +48,8 @@ resource "google_compute_instance" "k8s-master" {
       "export KUBECONFIG=~/admin.conf",
       "wget https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml",
       "sed -i \"s@10.96.232.136@10.45.0.2@\" calico.yaml",
+      "sudo kubectl -f calico.yaml",
+      "sudo kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/calicoctl.yaml",
     ]
 
     #"sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
