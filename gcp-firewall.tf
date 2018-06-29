@@ -12,12 +12,12 @@ resource "google_compute_firewall" "k8s-firewall" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "80", "179", "443", "6443", "8080", "2379-2380", "10053-10055", "10250-10256", "30000-32767"]
+    ports    = ["22", "80", "179", "443", "6443", "8080", "9099", "2379-2380", "10053-10055", "10250-10256", "30000-32767"]
   }
 
   allow {
     protocol = "udp"
-    ports    = ["8472"]
+    ports    = ["8472", "9099"]
   }
 
   #target_tags = ["${google_compute_instance.k8s-master.tags}"]
